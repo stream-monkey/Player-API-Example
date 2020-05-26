@@ -1,11 +1,11 @@
 {
-    "title": "Bare",
-    "name": "startbootstrap-bare",
+    "title": "Player API Example",
+    "name": "player-api-example",
     "version": "4.2.1",
     "scripts": {
         "start": "node_modules/.bin/gulp watch"
     },
-    "description": "A basic HTML starter template for Bootstrap",
+    "description": "A basic HTML example of interacting with the Stream Monkey Player",
     "keywords": [
         "css",
         "sass",
@@ -29,8 +29,8 @@
         "url": "https://github.com/BlackrockDigital/startbootstrap-bare.git"
     },
     "dependencies": {
-        "bootstrap": "4.3.1",
-        "jquery": "3.4.1"
+        "bootstrap": "4.5.0",
+        "jquery": "3.5.1"
     },
     "devDependencies": {
         "browser-sync": "2.26.7",
