@@ -20,6 +20,7 @@
         display: block;
         height: 300px;
         overflow-y: scroll;
+        color: #555;
     }
 </style>
 
@@ -40,7 +41,7 @@
                     style="padding: 0 0 56.25% 0;position: relative;height: 0;overflow: hidden;">
                     <div class="smEmbed" style="padding: 0 0 56.25% 0;position: relative;height: 0;overflow: hidden;">
                         <iframe id="streamMonkeyPlayer"
-                            src="https://sm-craft3.test/player/5ecc2744c5c03"
+                            src="https://player.streammonkey.com/5ca4fd8764d77"
                             width="100%" height="100%" frameborder="0"
                             style="position: absolute; top: 0;left: 0;width: 100%;height: 100%;"
                             allow="autoplay" allowfullscreen webkitAllowFullScreen mozAllowFullscreen
@@ -63,6 +64,7 @@
 
             <div class="col-lg-12 mt-5">
                 <button type="button" class="btn btn-secondary" onclick="addFullscreenListener()">Notify on Fullscreen</button>
+                <button type="button" class="btn btn-secondary" onclick="addCastStartedListener()">Notify on Cast</button>
         </div>
         </div>
     </div>
@@ -77,9 +79,9 @@
 
 <script>
     window.addEventListener('message', function (event) {
-        if (event.origin === 'https://player.streammonkey.com' || event.origin === 'https://sm-craft3.test') {
+        if (event.origin === 'https://player.streammonkey.com') {
             // Do something with the response
-            var response = event.data;
+            var response = event.data
 
             // If this is something coming back from the SM Player API, show it in the response box
             if (typeof response === 'object')
@@ -89,29 +91,40 @@
         } else {
             // Not from Stream Monkey! No need to do anything.
         }
-    });
+    })
 
-    function addFullscreenListener() {
-        var player = document.getElementById('streamMonkeyPlayer');
-
-        player.contentWindow.postMessage('player.notifyOnFullscreen', '*');
+    function getStreamMonkeyPlayer()
+    {
+        return document.getElementById('streamMonkeyPlayer')
     }
 
     function getCurrentTime() {
-        var player = document.getElementById('streamMonkeyPlayer');
+        var player = getStreamMonkeyPlayer()
 
-        player.contentWindow.postMessage('player.getCurrentTime', '*');
+        player.contentWindow.postMessage('player.getCurrentTime', '*')
     }
 
     function getIsFullscreen() {
-        var player = document.getElementById('streamMonkeyPlayer');
+        var player = getStreamMonkeyPlayer()
 
-        player.contentWindow.postMessage('player.isFullScreen', '*');
+        player.contentWindow.postMessage('player.isFullScreen', '*')
     }
 
     function getIsCasting() {
-        var player = document.getElementById('streamMonkeyPlayer');
+        var player = getStreamMonkeyPlayer()
 
-        player.contentWindow.postMessage('player.isCasting', '*');
+        player.contentWindow.postMessage('player.isCasting', '*')
+    }
+
+    function addFullscreenListener() {
+        var player = getStreamMonkeyPlayer()
+
+        player.contentWindow.postMessage('player.notifyOnFullscreenChange', '*')
+    }
+
+    function addCastStartedListener() {
+        var player = getStreamMonkeyPlayer()
+
+        player.contentWindow.postMessage('player.notifyOnCast', '*')
     }
 </script>
