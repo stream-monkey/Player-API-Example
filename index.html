@@ -101,7 +101,7 @@
     function getCurrentTime() {
         var player = getStreamMonkeyPlayer()
 
-        player.contentWindow.postMessage('player.getCurrentTime', '*')
+        player.contentWindow.postMessage('player.currentTime', '*')
     }
 
     function getIsFullscreen() {
